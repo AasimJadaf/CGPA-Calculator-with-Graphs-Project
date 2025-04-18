@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CGPA Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="cgpa.js"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .dark-theme {
+      background: linear-gradient(to bottom right, #1f2937, #111827);
+      color: white;
+    }
+    .light-theme {
+      background: linear-gradient(to bottom right, #f9fafb, #e5e7eb);
+      color: #1f2937;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.6s ease-out;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(-50%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .animate-slideIn {
+      animation: slideIn 0.5s ease-out;
+    }
+    @keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(-45deg, #1e3a8a, #9333ea, #10b981, #f59e0b);
+  background-size: 300% 300%;
+  animation: gradientShift 15s ease infinite;
+  color: white;
+}
+
+  </style>
+</head>
+<!-- <body class="dark-theme min-h-screen flex items-center justify-center p-6 transition-colors duration-500"> -->
+<body class="animated-gradient min-h-screen flex items-center justify-center p-6 transition-colors duration-500">
+
+  <div class="bg-gray-800 dark:bg-gray-900 p-8 rounded-3xl shadow-2xl w-full max-w-4xl text-white animate-fadeIn">
+
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-extrabold animate-bounce">📘 CGPA Calculator</h1>
+      <button onclick="toggleTheme()" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-xl text-sm transition">Toggle Theme</button>
+    </div>
+
+    <div id="grade-form" class="space-y-4"></div>
+
+    <div class="flex flex-wrap gap-4 mt-4">
+      <button onclick="addRow()" class="flex-1 bg-green-500 hover:bg-green-600 px-4 py-3 rounded-xl font-medium transition transform hover:scale-105">➕ Add Course</button>
+      <button onclick="calculateCGPA()" class="flex-1 bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-xl font-medium transition transform hover:scale-105">📊 Calculate CGPA</button>
+      <button onclick="clearForm()" class="flex-1 bg-red-500 hover:bg-red-600 px-4 py-3 rounded-xl font-medium transition transform hover:scale-105">🗑️ Clear All</button>
+      <button onclick="restartCalculator()" class="flex-1 bg-yellow-500 hover:bg-yellow-600 px-4 py-3 rounded-xl font-medium transition transform hover:scale-105">🔄 Restart</button>
+    </div>
+
+    <div class="mt-6">
+      <div class="w-full bg-gray-600 rounded-full h-4">
+        <div id="progress-bar" class="bg-green-400 h-4 rounded-full transition-all duration-500" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <div id="result" class="mt-6 text-center text-xl font-bold"></div>
+
+    <!-- Chart container -->
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold text-center mb-4">📈 GPA Chart</h2>
+      <canvas id="gpaChart" class="w-full h-80 bg-white rounded-xl"></canvas>
+    </div>
+  </div>
+
+  <audio id="chime-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"></audio>
+  <script src="cgpa.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+</body>
+</html>
